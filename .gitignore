@@ -1,0 +1,11 @@
+### IDE ###
+/.idea/
+/.vscode/
+
+**/.gradle
+**/build
+**/gradle/
+**/gradlew
+**/gradlew.bat
+**/bin
+
