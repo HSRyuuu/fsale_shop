@@ -32,6 +32,7 @@ public class Product {
 
     private String sku; // 재고 관리용 고유 상품 코드
 
+    @Enumerated(EnumType.STRING)
     private ProductStatus status;
 
     private Integer stockQuantity; // 재고 수량

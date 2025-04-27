@@ -14,7 +14,6 @@ public class BaseException extends RuntimeException {
     private Throwable cause;
     private Object data;
 
-
     public BaseException(HttpStatus status, String errorMessage, Throwable cause, Object data) {
         this.status = status;
         this.errorMessage = errorMessage;
@@ -22,20 +21,13 @@ public class BaseException extends RuntimeException {
         this.data = data;
     }
 
-    public BaseException(HttpStatus status) {
-        this(status, "", null, null);
-    }
-
     public BaseException(HttpStatus status, String errorMessage) {
         this(status, errorMessage, null, null);
     }
 
-    public BaseException(HttpStatus status, String errorMessage, Object data) {
-        this(status, errorMessage, null, data);
-    }
-
-    public BaseException(HttpStatus status, String errorMessage, Throwable cause) {
-        this(status, errorMessage, cause, null);
+    public static BaseException defaultNotFound(String additionalInfo) {
+        String errorMessage = ErrorMessage.NOT_FOUND + "=>" + additionalInfo;
+        return new BaseException(HttpStatus.NOT_FOUND, errorMessage, null, null);
     }
 
 }
