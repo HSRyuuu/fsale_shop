@@ -1,10 +1,11 @@
 package com.hsryuuu.flashsale.product;
 
 import com.hsryuuu.flashsale.product.dto.ProductDto;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.NONE)
 public final class ProductMapper {
-    private ProductMapper() {
-    }
 
     public static ProductDto fromEntity(Product product) {
         return ProductDto.builder()
