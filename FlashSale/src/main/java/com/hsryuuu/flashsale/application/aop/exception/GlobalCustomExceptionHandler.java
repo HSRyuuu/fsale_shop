@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalCustomExceptionHandler {
 
-    @ExceptionHandler(BaseException.class)
-    public ResponseEntity<StandardResponse<Object>> handleBaseException(BaseException e) {
+    @ExceptionHandler(GlobalException.class)
+    public ResponseEntity<StandardResponse<Object>> handleBaseException(GlobalException e) {
         StandardResponse<Object> standardResponse = new StandardResponse<>(e.getStatus(), e.getErrorMessage());
         // 발생한 에러가 BaseException.cause 에 담겨있는 경우
         if (e.getCause() != null) {

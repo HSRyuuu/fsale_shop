@@ -1,6 +1,7 @@
 package com.hsryuuu.flashsale.application.type;
 
-import com.hsryuuu.flashsale.application.aop.exception.ErrorMessage;
+import com.hsryuuu.flashsale.application.aop.exception.ErrorCode;
+import com.hsryuuu.flashsale.application.aop.exception.GlobalException;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collections;
@@ -22,7 +23,7 @@ public enum YNFlag {
                 return flag;
             }
         }
-        throw new IllegalArgumentException(ErrorMessage.BAD_REQUEST_ENUM);
+        throw new GlobalException(ErrorCode.BAD_REQUEST_ENUM);
     }
 
     public static List<YNFlag> getYesFlags() {
