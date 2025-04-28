@@ -27,7 +27,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     // PostgreSQL
     implementation 'org.postgresql:postgresql:42.7.5'
 
@@ -43,7 +43,8 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka'
     // rabbit mq
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
-
+    // redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

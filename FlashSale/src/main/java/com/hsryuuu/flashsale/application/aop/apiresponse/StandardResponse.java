@@ -1,27 +1,19 @@
 package com.hsryuuu.flashsale.application.aop.apiresponse;
 
 import com.hsryuuu.flashsale.application.type.OperationResult;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class StandardResponse<T> {
     private OperationResult result = OperationResult.SUCCESS;
     private int statusCode;
     private String message;
     private T data;
-
-
-    public StandardResponse(OperationResult result, int statusCode, String message, T data) {
-        this.result = result;
-        this.statusCode = statusCode;
-        this.message = message;
-        this.data = data;
-    }
 
     //에러
     public StandardResponse(HttpStatus status) {

@@ -1,11 +1,15 @@
 package com.hsryuuu.flashsale.application.aop.exception;
 
 import com.hsryuuu.flashsale.application.aop.apiresponse.StandardResponse;
+import com.hsryuuu.flashsale.application.type.OperationResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.List;
 
 @Slf4j
 @RestControllerAdvice
@@ -24,6 +28,25 @@ public class GlobalCustomExceptionHandler {
         log.error("Error Message: {}", e.getErrorMessage(), e);
         return ResponseEntity.status(e.getStatus()).body(standardResponse);
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<StandardResponse<Object>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        List<ValidationError> errors = e.getBindingResult().getFieldErrors()
+                .stream()
+                .map(err -> new ValidationError(err.getField(), err.getDefaultMessage()))
+                .toList();
+
+        StandardResponse<Object> standardResponse = StandardResponse.builder()
+                .result(OperationResult.ERROR)
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .message("요청 데이터 검증 실패")
+                .data(errors)
+                .build();
+
+        log.error("MethodArgumentNotValidException: {}", e.getMessage(), e);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(standardResponse);
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<StandardResponse<Object>> handleUnknownException(Exception e) {
